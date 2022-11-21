@@ -1,0 +1,37 @@
+name: CI/CD-S3
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # permission to allow github action to generate id-token
+    # commit permissions while using access-key/secret
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::855770807483:role/github-actions-role
+          role-session-name: GitHub-Action-Role
+          # aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          # aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Build React App
+        run: npm install && npm run build
+
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./build/ s3://rk-s3-demo --delete
