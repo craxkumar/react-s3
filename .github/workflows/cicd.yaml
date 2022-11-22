@@ -33,7 +33,7 @@ jobs:
       - name: Run test cases 
         run: |
           npm install
-          npm run test
+          npm test -- --coverage
 
       - name: Build React App
         run: npm run build
