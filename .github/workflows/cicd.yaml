@@ -29,11 +29,14 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Run test cases 
+        run: |
+          npm install
+          npm run test
 
       - name: Build React App
-        run: |
-          npm install && npm run build
-          npm run test
+        run: npm run test
 
       # - name: Deploy app build to S3 bucket
       #   run: aws s3 sync ./build/ s3://rk-s3-demo --delete
