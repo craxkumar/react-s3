@@ -36,12 +36,6 @@
     ]
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/components/**/*.js",
-      "src/state/**/*.js",
-      "src/templates/**/*.js",
-      "src/routes/**/*.js"
-    ],
     "coverageThreshold": {
       "global": {
         "branches": 0,
