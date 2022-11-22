@@ -40,8 +40,8 @@
       "global": {
         "branches": 80,
         "functions": 80,
-        "lines": 50,
-        "statements": 50
+        "lines": 6,
+        "statements": 6
       }
     }
   }
